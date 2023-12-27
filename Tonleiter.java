@@ -61,10 +61,11 @@ public class Tonleiter {
     }
 
     protected void print() {
-        System.out.println(grundton.letter + "-" + modus + "\n");
+        System.out.println(grundton.letter + "-" + modus);
         for(int i = 0; i< tonleiter.size(); i++) {
             tonleiter.get(i).print();
         }
+        System.out.println("");
     }
 }
 
