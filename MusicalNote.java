@@ -1,22 +1,22 @@
 import java.util.Map;
 import static java.util.Map.entry;
 
-public class Note {
+public class MusicalNote {
     // member
         String letter;
         int octave = 0;
         String name = "";
-        double frequenz; // Hz
+        double frequency; // Hz
         final String siUnit = "Hz";
 
-   Map<String, Double> kammertonFreq = Map.ofEntries(
+   Map<String, Double> concertPitchFreq = Map.ofEntries(
     entry("standard", 440.0),
     entry("de", 443.0),
     entry("at", 443.0),
     entry("ch", 442.0)
    );
 
-    Map<String, Double> normalCdur = Map.ofEntries(
+    Map<String, Double> normalCMajor = Map.ofEntries(
     entry("C", 264.0),
     entry("D", 297.0),
     entry("E", 330.0),
@@ -28,46 +28,46 @@ public class Note {
    );
 
     // default c-tor
-    Note() {
+    MusicalNote() {
         this.letter = "A";
-        this.frequenz = kammertonFreq.get("de");
+        this.frequency = concertPitchFreq.get("de");
         this.name = "Kammerton A";
         this.octave = 1;
-        System.out.println("Created musical note " + this.name + " ( " + this.frequenz + " " + siUnit + " ) as default.");
+        System.out.println("Created musical note " + this.name + " ( " + this.frequency + " " + siUnit + " ) as default.");
     }
 
     // full c-tor
-    Note(String letter, double frequenz, String name, int octave) {
+    MusicalNote(String letter, double frequency, String name, int octave) {
         this.letter = letter;
         // no frequency given; try to find it via letter
-        if(frequenz == -1) {
-            this.frequenz = normalCdur.get(letter);
+        if(frequency == -1) {
+            this.frequency = normalCMajor.get(letter);
         } else {
-            this.frequenz = frequenz;
+            this.frequency = frequency;
         }
         this.name = name;
         this.octave = octave;
     }
 
-     Note(String letter, double frequenz, String name) {
-         this(letter, frequenz, name, 1);
+    MusicalNote(String letter, double frequency, String name) {
+         this(letter, frequency, name, 1);
     }
 
     
-    Note(String letter, double frequenz, int octave) {
-         this(letter, frequenz, "", octave);
+    MusicalNote(String letter, double frequency, int octave) {
+         this(letter, frequency, "", octave);
     }
 
-    Note(String letter, double frequenz) {
-       this(letter, frequenz, "", 1);
+    MusicalNote(String letter, double frequency) {
+       this(letter, frequency, "", 1);
     }
 
-    Note(String letter) {
+    MusicalNote(String letter) {
       this(letter, -1, "", 1);
     }
 
     protected void print() {
-        System.out.println(letter + octaveToSymbols(octave) + "\t( " + frequenz + siUnit +  " )");
+        System.out.println(letter + octaveToSymbols(octave) + "\t( " + frequency + siUnit +  " )");
     }
 
     protected static String octaveToSymbols(int octave) {

@@ -1,41 +1,38 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tonleiter {
-
-    public static final String DUR = "Dur"; 
-    public static final String MOLL = "Moll"; 
+public class Scale {
 
     String symbol;
 
-    Note grundton;
-    Intervall[] intervals;
+    MusicalNote fundamentalTone;
+    Interval[] intervals;
     String modus;
-    List<Note> tonleiter = new ArrayList<Note>();
+    List<MusicalNote> scale = new ArrayList<MusicalNote>();
 
-    Tonleiter(Note grundton, String modus) {
-        this.grundton = grundton;
+    Scale(MusicalNote fundamentalTone, String modus) {
+        this.fundamentalTone = fundamentalTone;
         if(Modi.modus.containsKey(modus.toLowerCase())) {
             this.modus = modus;
         } else {
             System.err.println("Unknown modus: " + modus);
         };
         this.intervals = Modi.modus.get(modus.toLowerCase());
-        this.symbol = Note.octaveToSymbols(grundton.octave);
-        //System.out.println("Grundton: " + grundton.letter + "\nModus: " + modus + "\nIntervals: " + intervals.length);
-        createTonleiter();
+        this.symbol = MusicalNote.octaveToSymbols(fundamentalTone.octave);
+        //System.out.println("Fundamental tone: " + fundamentalTone.letter + "\nModus: " + modus + "\nIntervals: " + intervals.length);
+        createScale();
     }
 
-    private void createTonleiter() {
-        String[] tonnamen = getTonnamen(this.grundton.letter, this.modus, this.grundton.octave);
-        tonleiter.add(this.grundton);
+    private void createScale() {
+        String[] tonnamen = getNoteLetters(this.fundamentalTone.letter, this.modus, this.fundamentalTone.octave);
+        scale.add(this.fundamentalTone);
          for(int i = 1; i < this.intervals.length; i++) {
-            tonleiter.add(new Note(tonnamen[i], this.grundton.frequenz * this.intervals[i].interval, this.grundton.octave));
-            //System.out.println(i + " Tonname:" + tonnamen[i] + "\nFrequenz: " + this.grundton.frequenz + " * " + this.intervals[i].interval + " = " + this.grundton.frequenz * this.intervals[i].interval);
+            scale.add(new MusicalNote(tonnamen[i], this.fundamentalTone.frequency * this.intervals[i].interval, this.fundamentalTone.octave));
+            //System.out.println(i + " Tonname:" + tonnamen[i] + "\nFrequenz: " + this.fundamentalTone.frequency + " * " + this.intervals[i].interval + " = " + this.fundamentalTone.frequency * this.intervals[i].interval);
         }
     }
 
-    private String[] getTonnamen(String letter, String modus, int octave) {
+    private String[] getNoteLetters(String letter, String modus, int octave) {
         String[] result = {};
         switch(modus) {
             case "Dur":
@@ -61,9 +58,9 @@ public class Tonleiter {
     }
 
     protected void print() {
-        System.out.println(grundton.letter + "-" + modus);
-        for(int i = 0; i< tonleiter.size(); i++) {
-            tonleiter.get(i).print();
+        System.out.println(fundamentalTone.letter + "-" + modus);
+        for(int i = 0; i< scale.size(); i++) {
+            scale.get(i).print();
         }
         System.out.println("");
     }
