@@ -16,12 +16,17 @@ public class MusicalNote {
     entry("ch", 442.0)
    );
 
-    Map<String, Double> cMajor = Map.ofEntries(
+    Map<String, Double> defaultScale = Map.ofEntries(
     entry("C", 264.0),
+    entry("Cis", 280.5),
     entry("D", 297.0),
+    entry("Dis", 313.5),
     entry("E", 330.0),
+    entry("Eis", 341.0),
     entry("F", 352.0),
+    entry("Fis", 374.0),
     entry("G", 396.0),
+    entry("Gis", 418.0),
     entry("A", 440.0),
     entry("B", 466.0),
     entry("H", 495.0)
@@ -41,10 +46,10 @@ public class MusicalNote {
         this.letter = letter;
         // no frequency given; try to find it via letter in a c-major scale
         if(frequency == -1) {
-            if(cMajor.containsKey(letter)) {
-                this.frequency = cMajor.get(letter);
+            if(defaultScale.containsKey(letter)) {
+                this.frequency = defaultScale.get(letter);
             } else {
-                throw new Exception("No musical note found named '"+ letter + "' in C-Major default scale.");
+                throw new Exception("No musical note found named '"+ letter + "' in default scale (based on concert pitch A, starting with C).");
             }
         } else {
             this.frequency = frequency;
