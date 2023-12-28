@@ -19,30 +19,29 @@ public class Scale {
         };
         this.intervals = Modi.modus.get(modus.toLowerCase());
         this.symbol = MusicalNote.octaveToSymbols(fundamentalTone.octave);
-        //System.out.println("Fundamental tone: " + fundamentalTone.letter + "\nModus: " + modus + "\nIntervals: " + intervals.length);
         createScale();
     }
 
     private void createScale() {
-        String[] tonnamen = getNoteLetters(this.fundamentalTone.letter, this.modus, this.fundamentalTone.octave);
-        scale.add(this.fundamentalTone);
+        String[] toneNames = getNoteLetters(this.fundamentalTone.letter, this.modus, this.fundamentalTone.octave);
+        this.scale.add(this.fundamentalTone);
          for(int i = 1; i < this.intervals.length; i++) {
-            scale.add(new MusicalNote(tonnamen[i], this.fundamentalTone.frequency * this.intervals[i].interval, this.fundamentalTone.octave));
-            //System.out.println(i + " Tonname:" + tonnamen[i] + "\nFrequenz: " + this.fundamentalTone.frequency + " * " + this.intervals[i].interval + " = " + this.fundamentalTone.frequency * this.intervals[i].interval);
+            this.scale.add(new MusicalNote(toneNames[i], this.fundamentalTone.frequency * this.intervals[i].interval, this.fundamentalTone.octave));
+            //System.out.println(i + " Tonname:" + tonnamen[i] + "\nFrequency: " + this.fundamentalTone.frequency + " * " + this.intervals[i].interval + " = " + this.fundamentalTone.frequency * this.intervals[i].interval);
         }
     }
 
     private String[] getNoteLetters(String letter, String modus, int octave) {
         String[] result = {};
         switch(modus) {
-            case "Dur":
+            case "Major":
                 switch(letter) {
                     case "C":
                         result = addSymbols(new String[]{"C", "D", "E", "F", "G", "A", "H", "C"});
                         break;
                 }
 
-            case "Moll":
+            case "Minor":
                 switch(letter) {}
         }
         return result;
@@ -58,6 +57,7 @@ public class Scale {
     }
 
     protected void print() {
+        System.out.println("Fundamental tone: " + fundamentalTone.letter + "\nModus: " + modus + "\nIntervals: " + intervals.length + "  (incl. fundamental tone itself 'prime' )");
         System.out.println(fundamentalTone.letter + "-" + modus);
         for(int i = 0; i< scale.size(); i++) {
             scale.get(i).print();

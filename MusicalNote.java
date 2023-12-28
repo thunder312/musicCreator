@@ -10,13 +10,13 @@ public class MusicalNote {
         final String siUnit = "Hz";
 
    Map<String, Double> concertPitchFreq = Map.ofEntries(
-    entry("standard", 440.0),
+    entry("default", 440.0),
     entry("de", 443.0),
     entry("at", 443.0),
     entry("ch", 442.0)
    );
 
-    Map<String, Double> normalCMajor = Map.ofEntries(
+    Map<String, Double> cMajor = Map.ofEntries(
     entry("C", 264.0),
     entry("D", 297.0),
     entry("E", 330.0),
@@ -30,7 +30,7 @@ public class MusicalNote {
     // default c-tor
     MusicalNote() {
         this.letter = "A";
-        this.frequency = concertPitchFreq.get("de");
+        this.frequency = concertPitchFreq.get("default");
         this.name = "Kammerton A";
         this.octave = 1;
         System.out.println("Created musical note " + this.name + " ( " + this.frequency + " " + siUnit + " ) as default.");
@@ -39,9 +39,9 @@ public class MusicalNote {
     // full c-tor
     MusicalNote(String letter, double frequency, String name, int octave) {
         this.letter = letter;
-        // no frequency given; try to find it via letter
+        // no frequency given; try to find it via letter in a c-major scale
         if(frequency == -1) {
-            this.frequency = normalCMajor.get(letter);
+            this.frequency = cMajor.get(letter);
         } else {
             this.frequency = frequency;
         }
