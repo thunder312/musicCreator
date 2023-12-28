@@ -26,8 +26,8 @@ public class Scale {
         String[] toneNames = getNoteLetters(this.fundamentalTone.letter, this.modus, this.fundamentalTone.octave);
         this.scale.add(this.fundamentalTone);
          for(int i = 1; i < this.intervals.length; i++) {
-            this.scale.add(new MusicalNote(toneNames[i], this.fundamentalTone.frequency * this.intervals[i].interval, this.fundamentalTone.octave));
-            //System.out.println(i + " Tonname:" + tonnamen[i] + "\nFrequency: " + this.fundamentalTone.frequency + " * " + this.intervals[i].interval + " = " + this.fundamentalTone.frequency * this.intervals[i].interval);
+            this.scale.add(new MusicalNote(toneNames[i], this.fundamentalTone.frequency * this.intervals[i].proportion, this.fundamentalTone.octave));
+            //System.out.println(i + " Tonname:" + tonnamen[i] + "\nFrequency: " + this.fundamentalTone.frequency + " * " + this.intervals[i].proportion + " = " + this.fundamentalTone.frequency * this.intervals[i].interval);
         }
     }
 
@@ -37,12 +37,18 @@ public class Scale {
             case "Major":
                 switch(letter) {
                     case "C":
-                        result = addSymbols(new String[]{"C", "D", "E", "F", "G", "A", "H", "C"});
+                        result = addSymbols(new String[]{"C", "D", "E", "F", "G", "A", "Ces/H", "C"});
                         break;
                 }
+            break;
 
             case "Minor":
-                switch(letter) {}
+                switch(letter) {
+                    case "C":
+                        result = addSymbols(new String[]{"C", "D", "Dis", "F", "G", "Gis", "Ais/B", "C"});
+                        break;
+                }
+            break;
         }
         return result;
     }
