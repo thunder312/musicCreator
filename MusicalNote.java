@@ -31,17 +31,21 @@ public class MusicalNote {
     MusicalNote() {
         this.letter = "A";
         this.frequency = concertPitchFreq.get("default");
-        this.name = "Kammerton A";
+        this.name = "concert pitch 'A'";
         this.octave = 1;
         System.out.println("Created musical note " + this.name + " ( " + this.frequency + " " + siUnit + " ) as default.");
     }
 
     // full c-tor
-    MusicalNote(String letter, double frequency, String name, int octave) {
+    MusicalNote(String letter, double frequency, String name, int octave) throws Exception {
         this.letter = letter;
         // no frequency given; try to find it via letter in a c-major scale
         if(frequency == -1) {
-            this.frequency = cMajor.get(letter);
+            if(cMajor.containsKey(letter)) {
+                this.frequency = cMajor.get(letter);
+            } else {
+                throw new Exception("No musical note found named '"+ letter + "' in C-Major default scale.");
+            }
         } else {
             this.frequency = frequency;
         }
@@ -49,20 +53,20 @@ public class MusicalNote {
         this.octave = octave;
     }
 
-    MusicalNote(String letter, double frequency, String name) {
+    MusicalNote(String letter, double frequency, String name) throws Exception {
          this(letter, frequency, name, 1);
     }
 
     
-    MusicalNote(String letter, double frequency, int octave) {
+    MusicalNote(String letter, double frequency, int octave) throws Exception{
          this(letter, frequency, "", octave);
     }
 
-    MusicalNote(String letter, double frequency) {
+    MusicalNote(String letter, double frequency) throws Exception {
        this(letter, frequency, "", 1);
     }
 
-    MusicalNote(String letter) {
+    MusicalNote(String letter) throws Exception {
       this(letter, -1, "", 1);
     }
 

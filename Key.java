@@ -5,7 +5,7 @@ public class Key {
     Scale scale;
     
     //default c-tor: C-Dur
-    Key() {
+    Key() throws Exception {
         this.fundamentalTone = new MusicalNote("C", 264, 1);
     }
 

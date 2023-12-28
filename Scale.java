@@ -10,19 +10,19 @@ public class Scale {
     String modus;
     List<MusicalNote> scale = new ArrayList<MusicalNote>();
 
-    Scale(MusicalNote fundamentalTone, String modus) {
+    Scale(MusicalNote fundamentalTone, String modus) throws Exception{
         this.fundamentalTone = fundamentalTone;
-        if(Modi.modus.containsKey(modus.toLowerCase())) {
+        if(Modi.getModi().containsKey(modus.toLowerCase())) {
             this.modus = modus;
         } else {
             System.err.println("Unknown modus: " + modus);
         };
-        this.intervals = Modi.modus.get(modus.toLowerCase());
+        this.intervals = Modi.modiIntervals.get(modus.toLowerCase());
         this.symbol = MusicalNote.octaveToSymbols(fundamentalTone.octave);
         createScale();
     }
 
-    private void createScale() {
+    private void createScale() throws Exception {
         String[] toneNames = getNoteLetters(this.fundamentalTone.letter, this.modus, this.fundamentalTone.octave);
         this.scale.add(this.fundamentalTone);
          for(int i = 1; i < this.intervals.length; i++) {
@@ -65,13 +65,3 @@ public class Scale {
         System.out.println("");
     }
 }
-
-    /* weitere Modi
-        // Ionisch (Dur)
-        // Dorisch
-        // Phrygisch
-        // Lydisch
-        // Mixolydisch
-        // Äolisch (Moll)
-        // Lokrisch
-    */
