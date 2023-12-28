@@ -3,5 +3,7 @@ public class Main {
         MusicalNote fundamentalTone = new MusicalNote("C");
         Scale cMajor = new Scale(fundamentalTone, "Major");
         cMajor.print();
+
+        Interval.printIntervals();
     }
 }

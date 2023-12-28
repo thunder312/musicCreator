@@ -1,6 +1,9 @@
 import java.util.Map;
 import static java.util.Map.entry;
 
+import java.io.StringWriter;
+import java.util.HashMap;
+
 public class Interval{
     String interval;
     String details = "";
@@ -66,6 +69,16 @@ public class Interval{
         INTERVALS.get("Sepk"),
         INTERVALS.get("Ok")
     };
+
+    public static void printIntervals() {
+        StringWriter returnString = new StringWriter();
+        for(Map.Entry<String, Interval> entry : INTERVALS.entrySet()) {
+            returnString.append(String.format("%-10s", entry.getKey()) + "|" + String.format("%-15s",entry.getValue().interval) + "|" + String.format("%-55s",entry.getValue().details) + "| " + String.format("%-15s",entry.getValue().propCounter + "/" +  entry.getValue().propDenom) + "| " + String.format("%-10s",entry.getValue().propCounter / entry.getValue().propDenom) );
+            returnString.append("\n");
+        }
+        returnString.append("\r\n");
+        System.out.println(returnString.toString());
+    }
 
      // dorian
         // phrygian
