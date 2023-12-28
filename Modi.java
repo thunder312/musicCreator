@@ -4,8 +4,8 @@ import static java.util.Map.entry;
 public class Modi {
    
     static final Map<String, Interval[]> modiIntervals = Map.ofEntries(
-        entry("major", Interval.majorIntervals),
-        entry("minor", Interval.minorIntervals)
+        entry("major", Interval.majorIntervalsClean),
+        entry("minor", Interval.minorIntervalsClean)
         // dorian
         // phrygian
         // lydian
