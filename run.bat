@@ -1,0 +1,1 @@
+java -cp ./bin/scalemaker.jar Main
