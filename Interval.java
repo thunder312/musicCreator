@@ -2,6 +2,7 @@ import java.util.Map;
 import static java.util.Map.entry;
 
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 
 public class Interval{
     String shortName;
@@ -73,13 +74,16 @@ public class Interval{
     };
 
     public static void printIntervals() {
-        StringWriter returnString = new StringWriter();
+
+        StringWriter sw = new StringWriter();
         for(Map.Entry<Integer, Interval> entry : INTERVALS.entrySet()) {
-            returnString.append(String.format("%-5s", entry.getKey()) + "|" + String.format("%-5s", entry.getValue().shortName) + "|" + String.format("%-15s",entry.getValue().interval) + "|" + String.format("%-55s",entry.getValue().details) + "| " + String.format("%-15s",entry.getValue().propCounter + "/" +  entry.getValue().propDenom) + "| " + String.format("%-10s",entry.getValue().propCounter / entry.getValue().propDenom) );
-            returnString.append("\n");
+            sw.append(String.format("%-5s", entry.getKey()) + "|" + String.format("%-5s", entry.getValue().shortName) + "|" + String.format("%-15s",entry.getValue().interval) + "|" + String.format("%-55s",entry.getValue().details) + "| " + String.format("%-15s",entry.getValue().propCounter + "/" +  entry.getValue().propDenom) + "| " + String.format("%-10s",entry.getValue().propCounter / entry.getValue().propDenom) );
+            sw.append("\n");
         }
-        returnString.append("\r\n");
-        System.out.println(returnString.toString());
+        sw.append("\r\n");
+
+        String returnString = Helper.convertToCharset(sw.toString(), StandardCharsets.UTF_8);
+        System.out.println(returnString);
     }
 
      // dorian
